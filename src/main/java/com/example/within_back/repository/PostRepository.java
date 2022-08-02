@@ -1,0 +1,7 @@
+package com.example.within_back.repository;
+
+import com.example.within_back.entity.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRepository extends JpaRepository<Post, Long> {
+}
