@@ -19,7 +19,7 @@ public class Message {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "partner_id")
     private User partner;
 
     @Builder
