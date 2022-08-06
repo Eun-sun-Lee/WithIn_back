@@ -21,8 +21,6 @@ public class PostResDto {
         this.authorNickname = post.getAuthor().getNickname();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.createdAt = post.getCreatedAt();
-        this.updatedAt = post.getUpdatedAt();
         this.like = post.getLike();
     }
 }

@@ -16,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String email;
     private String nickname;
 
     private String myPost;
@@ -39,7 +40,8 @@ public class User {
     private List<Comment> myComments = new ArrayList();
 
     @Builder
-    public User(String nickname, String myPost, String army, String position, String mbti) {
+    public User(String email, String nickname, String myPost, String army, String position, String mbti) {
+        this.email = email;
         this.nickname = nickname;
         this.myPost = myPost;
         this.army = army;

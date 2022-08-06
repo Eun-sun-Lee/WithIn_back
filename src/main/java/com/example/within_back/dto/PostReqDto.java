@@ -16,7 +16,7 @@ public class PostReqDto {
 
 
         public Post toEntity(Board board){
-            return new Post(board, author=this.author, title=this.title,content=this.content, createdAt=this.createdAt,updatedAt=this.updatedAt,like=this.like);
+            return new Post(board, author, title,content,like);
+           // return new Post(board, author=this.author, title=this.title,content=this.content, createdAt=this.createdAt,updatedAt=this.updatedAt,like=this.like);
         }
     }
-}
