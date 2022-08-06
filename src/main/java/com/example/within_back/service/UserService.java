@@ -27,7 +27,7 @@ public class UserService {
     UserRepository userRepository;
 
     public ArrayList<PostResDto> getMyPosts(Long userId){
-        ArrayList<Post> data = postRepository.findByUserId(userId);
+        ArrayList<Post> data = postRepository.findByAuthorId(userId);
 
         ArrayList<PostResDto> result = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public ArrayList<MessageResDto> getMyMessages(Long userId){
-        ArrayList<Message> data = messageRepository.findByUserIdOrPartnerId(userId);
+        ArrayList<Message> data = messageRepository.findByUserIdOrPartnerId(userId, userId);
 
         ArrayList<MessageResDto> result = new ArrayList<>();
 
@@ -54,5 +54,16 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
         User partner = userRepository.findById(partnerId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
         return messageRepository.save(messageReqDto.toEntity(user, partner)).getId();
+    }
+
+    public ArrayList<MessageResDto> getMessagesWithPartner(Long userId, Long partnerId){
+        ArrayList<Message> data = messageRepository.findByUserIdAndPartnerId(userId, partnerId);
+
+        ArrayList<MessageResDto> result = new ArrayList<>();
+        for(Message message : data){
+            result.add(new MessageResDto(message));
+        }
+
+        return result;
     }
 }

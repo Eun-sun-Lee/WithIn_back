@@ -30,4 +30,9 @@ public class UserController {
     private Long sendMessage(@PathVariable Long userId, @PathVariable Long partnerId, @RequestBody MessageReqDto messageReqDto){
         return userService.sendMessage(userId, partnerId, messageReqDto);
     }
+
+    @GetMapping("/{userId}/messages/{partnerId}")
+    private ArrayList<MessageResDto> getMessagesWithPartner(@PathVariable Long userId, @PathVariable Long partnerId){
+        return userService.getMessagesWithPartner(userId, partnerId);
+    }
 }
