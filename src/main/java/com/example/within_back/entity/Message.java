@@ -22,6 +22,8 @@ public class Message {
     @JoinColumn(name = "partner_id")
     private User partner;
 
+    private String content;
+
     @Builder
     public Message(User user, User partner) {
         this.user = user;

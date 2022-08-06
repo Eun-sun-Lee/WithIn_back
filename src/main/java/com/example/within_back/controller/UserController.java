@@ -1,5 +1,6 @@
 package com.example.within_back.controller;
 
+import com.example.within_back.dto.MessageResDto;
 import com.example.within_back.dto.PostResDto;
 import com.example.within_back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class UserController {
     @GetMapping("/{userId}/posts")
     private ArrayList<PostResDto> getMyPosts(@PathVariable Long userId){
         return userService.getMyPosts(userId);
+    }
+
+    @GetMapping("/{userId}/messages")
+    private ArrayList<MessageResDto> getMyMessages(@PathVariable Long userId){
+        return userService.getMyMessages(userId);
     }
 }
