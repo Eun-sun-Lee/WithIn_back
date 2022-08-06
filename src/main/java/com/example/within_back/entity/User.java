@@ -26,8 +26,8 @@ public class User {
 
     private String mbti;
 
-    @OneToMany(mappedBy = "user")
-    private List<Hobby> myHobbies = new ArrayList();
+//    @OneToMany(mappedBy = "user")
+//    private List<Hobby> myHobbies = new ArrayList();
 
     @OneToMany(mappedBy = "user")
     private List<Message> myMessages = new ArrayList();
