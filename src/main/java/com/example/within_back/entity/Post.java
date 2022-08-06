@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Post {
+public class Post extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,23 +28,17 @@ public class Post {
 
     private String content;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
     private int like;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
 
     @Builder
-    public Post(Board board, User author, String title, String content, LocalDateTime createdAt, LocalDateTime updatedAt, int like) {
+    public Post(Board board, User author, String title, String content, int like) {
         this.board = board;
         this.author = author;
         this.title = title;
         this.content = content;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.like = like;
     }
 }

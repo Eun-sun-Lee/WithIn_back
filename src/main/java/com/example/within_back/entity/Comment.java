@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Comment {
+public class Comment extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,16 +25,10 @@ public class Comment {
 
     private String content;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
     @Builder
-    public Comment(Post post, User author, String content, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Comment(Post post, User author, String content) {
         this.post = post;
         this.author = author;
         this.content = content;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 }
