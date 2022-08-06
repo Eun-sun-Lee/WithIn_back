@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Message {
+public class Message extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,9 +22,12 @@ public class Message {
     @JoinColumn(name = "partner_id")
     private User partner;
 
+    private String content;
+
     @Builder
-    public Message(User user, User partner) {
+    public Message(User user, User partner, String content) {
         this.user = user;
         this.partner = partner;
+        this.content = content;
     }
 }
