@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    public ArrayList<Message> findByUserId(Long userId);
+    public ArrayList<Message> findByUserIdOrPartnerId(Long userId);
 }

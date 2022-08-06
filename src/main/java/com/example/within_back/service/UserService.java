@@ -1,11 +1,14 @@
 package com.example.within_back.service;
 
+import com.example.within_back.dto.MessageReqDto;
 import com.example.within_back.dto.MessageResDto;
 import com.example.within_back.dto.PostResDto;
 import com.example.within_back.entity.Message;
 import com.example.within_back.entity.Post;
+import com.example.within_back.entity.User;
 import com.example.within_back.repository.MessageRepository;
 import com.example.within_back.repository.PostRepository;
+import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,9 @@ public class UserService {
     @Autowired
     MessageRepository messageRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public ArrayList<PostResDto> getMyPosts(Long userId){
         ArrayList<Post> data = postRepository.findByUserId(userId);
 
@@ -33,7 +39,7 @@ public class UserService {
     }
 
     public ArrayList<MessageResDto> getMyMessages(Long userId){
-        ArrayList<Message> data = messageRepository.findByUserId(userId);
+        ArrayList<Message> data = messageRepository.findByUserIdOrPartnerId(userId);
 
         ArrayList<MessageResDto> result = new ArrayList<>();
 
@@ -42,5 +48,11 @@ public class UserService {
         }
 
         return result;
+    }
+
+    public Long sendMessage(Long userId, Long partnerId, MessageReqDto messageReqDto) throws IllegalArgumentException{
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
+        User partner = userRepository.findById(partnerId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
+        return messageRepository.save(messageReqDto.toEntity(user, partner)).getId();
     }
 }

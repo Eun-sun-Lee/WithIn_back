@@ -25,8 +25,9 @@ public class Message {
     private String content;
 
     @Builder
-    public Message(User user, User partner) {
+    public Message(User user, User partner, String content) {
         this.user = user;
         this.partner = partner;
+        this.content = content;
     }
 }
