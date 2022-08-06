@@ -1,6 +1,7 @@
 package com.example.within_back.service;
 
 import com.example.within_back.dto.PostReqDto;
+import com.example.within_back.dto.PostResDto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Post;
 import com.example.within_back.repository.BoardRepository;
@@ -14,15 +15,15 @@ import java.util.ArrayList;
 public class PostService {
 
     @Autowired
+    static
     PostRepository postRepository;
     BoardRepository boardRepository;
 
-    public ArrayList<PostReqDto> getPosts(String category){
+    public static ArrayList<PostResDto> getPosts(String category){
         ArrayList<Post> data = postRepository.findByCategory(category);
-        ArrayList<PostReqDto> result = new ArrayList<>();
-
+        ArrayList<PostResDto> result = new ArrayList<>();
         for(Post post : data) {
-            PostReqDto temp = new PostReqDto(post);
+            PostResDto temp = new PostResDto(post);
             result.add(temp)
 ;        }
         return result;
@@ -30,15 +31,15 @@ public class PostService {
     //게시판 게시물 조회 (GET 방식)
 
 
-    public Long save(PostReqDto postResDto, String category){
-        Board board = boardRepository.findByCategory(category).orElseThrow(()-> new IllegalArgumentException("해당 카테고리는 유효하지 않는 카테고리입니다."));
-        return postRepository.save(postResDto.toEntity(board)).getId();
+    public Long save(PostReqDto postReqDto, String category){
+        Board board = boardRepository.findByCategory(category);
+        return postRepository.save(postReqDto.toEntity(board)).getId();
     } //게시물 작성 (POST 방식)
 
 
-    public PostReqDto findById(Long postId){
+    public PostResDto findById(Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
-        return new PostReqDto(post);
+        return new PostResDto(post);
     } //게시글 조회
 }
