@@ -1,5 +1,8 @@
 package com.example.within_back.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"myHobbies", "myMessages", "myPosts", "myComments"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nickname")
+@JsonIdentityReference(alwaysAsId = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
