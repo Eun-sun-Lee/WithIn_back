@@ -22,6 +22,6 @@ public class CommentsResDto {
         this.author = comment.getAuthor();
         this.content = comment.getContent();
         this.createdAt = comment.getCreatedAt();
-        this.updatedAt = comment.getUpdatedAt();
+        this.updatedAt = comment.getModifiedAt();
     }
 }

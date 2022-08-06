@@ -11,11 +11,10 @@ import java.time.LocalDateTime;
 public class CommentReqDto {
     private User author;
     private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public Comment toEntity(Post post) {
-        return new Comment(post, author, content, createdAt, updatedAt);
+
+        return new Comment(post, author, content);
     }
 }
 
