@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Group {
+public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,7 @@ public class Group {
     private String category;
 
     @Builder
-    public Group(User user, String category) {
+    public Hobby(User user, String category) {
         this.user = user;
         this.category = category;
     }

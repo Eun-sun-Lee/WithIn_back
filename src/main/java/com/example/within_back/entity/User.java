@@ -1,14 +1,10 @@
 package com.example.within_back.entity;
 
-import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +20,14 @@ public class User {
 
     private String myPost;
 
+    private String army;
+
+    private String position;
+
+    private String mbti;
+
     @OneToMany(mappedBy = "user")
-    private List<Group> myGroups = new ArrayList();
+    private List<Hobby> myHobbies = new ArrayList();
 
     @OneToMany(mappedBy = "user")
     private List<Message> myMessages = new ArrayList();
@@ -37,8 +39,11 @@ public class User {
     private List<Comment> myComments = new ArrayList();
 
     @Builder
-    public User(String nickname, String myPost) {
+    public User(String nickname, String myPost, String army, String position, String mbti) {
         this.nickname = nickname;
         this.myPost = myPost;
+        this.army = army;
+        this.position = position;
+        this.mbti = mbti;
     }
 }
