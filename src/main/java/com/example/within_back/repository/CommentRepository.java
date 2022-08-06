@@ -7,5 +7,7 @@ import javax.persistence.OrderBy;
 import java.util.ArrayList;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    public ArrayList<Comment> findByPostIdOrderByCreatedAt(long postId);
+    public ArrayList<Comment> findByPostIdOrderByCreatedAt(Long postId);
+
+
 }
