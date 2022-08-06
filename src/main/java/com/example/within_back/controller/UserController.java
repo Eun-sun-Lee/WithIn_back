@@ -18,6 +18,4 @@ public class UserController {
         return userService.getHobby(userId);
     }
 
-    @PostMapping("/{userId}/myGroup")
-    public
 }
