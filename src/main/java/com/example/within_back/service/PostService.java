@@ -16,6 +16,10 @@ public class PostService {
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    PostRepository postRepository;
+
     public ArrayList<CommentsResDto> getComments(Long postId) {
         ArrayList<Comment> data = commentRepository.findByPostIdOrderByCreatedAt(postId);
 
@@ -30,7 +34,7 @@ public class PostService {
     }
 
     public Long writeComment(Long postId, CommentReqDto commentReqDto) {
-        Post post = PostRepository.findByPostId(postId);
-        return CommentRepository.save(commentReqDto.toEntity()).getId;
+        Post post = postRepository.findById(postId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 post id 입니다."));
+        return commentRepository.save(commentReqDto.toEntity(post)).getId();
     }
 }
