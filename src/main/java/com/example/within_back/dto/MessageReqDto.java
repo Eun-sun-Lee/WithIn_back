@@ -2,7 +2,9 @@ package com.example.within_back.dto;
 
 import com.example.within_back.entity.Message;
 import com.example.within_back.entity.User;
+import lombok.Getter;
 
+@Getter
 public class MessageReqDto {
 
     private String content;

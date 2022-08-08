@@ -1,7 +1,9 @@
 package com.example.within_back.dto;
 
 import com.example.within_back.entity.Message;
+import lombok.Getter;
 
+@Getter
 public class MessageResDto {
 
     private Long id;

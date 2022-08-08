@@ -22,7 +22,7 @@ public class PostResDto {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
-        this.updatedAt = post.getUpdatedAt();
+        this.updatedAt = post.getModifiedAt();
         this.like = post.getLike();
     }
 }

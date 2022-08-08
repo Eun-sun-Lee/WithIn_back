@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public ArrayList<MessageResDto> getMyMessages(Long userId){
-        ArrayList<Message> data = messageRepository.findByUserIdOrPartnerId(userId, userId);
+        ArrayList<Message> data = messageRepository.findMyMessages(userId);
 
         ArrayList<MessageResDto> result = new ArrayList<>();
 
