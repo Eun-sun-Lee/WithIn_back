@@ -26,7 +26,7 @@ public class PostController {
 
     @RequestMapping(value="/boards/{category}", method=RequestMethod.GET)
     public ArrayList<PostResDto> getPosts(@PathVariable String category){
-        return PostService.getPosts(category);
+        return postService.getPosts(category);
     }
     //게시판 게시물 조회 (GET 방식)
 

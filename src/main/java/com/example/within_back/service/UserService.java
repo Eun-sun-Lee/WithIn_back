@@ -1,6 +1,7 @@
 package com.example.within_back.service;
 
 import com.example.within_back.dto.BoardResDto;
+import com.example.within_back.dto.HobbyResDto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Hobby;
 import com.example.within_back.entity.User;
@@ -19,7 +20,7 @@ public class UserService {
     UserRepository userRepository;
     HobbyRepository hobbyRepository;
 
-    public ArrayList<BoardResDto> getMyBoard(Long userId){
+    public ArrayList<BoardResDto> getMyBoard(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 user가 없습니다."));
         String army = user.getArmy();
         String position = user.getPosition();
@@ -27,27 +28,23 @@ public class UserService {
         Board boardArmy = boardRepository.findByCategory(army);
         Board boardPosition = boardRepository.findByCategory(position);
         Board boardMbti = boardRepository.findByCategory(mbti);
-        Hobby hobby = hobbyRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 user가 없습니다."));
-        String hobbies = hobby.getCategory();
-        Board boardHobby = boardRepository.findByCategory(hobbies);
 
+        ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<BoardResDto> result = new ArrayList<>();
 
-        for (Board board : data){
-            BoardResDto temp = new BoardResDto(board);
+
+        for (Hobby hobby : data) {
+            String hobbyCategory = hobby.getCategory();
+            Board boardHobby = boardRepository.findByCategory(hobbyCategory);
+            BoardResDto temp = new BoardResDto(boardHobby);
             result.add(temp);
         }
+        BoardResDto temp1 = new BoardResDto(boardArmy);
+        result.add(temp1);
+        BoardResDto temp2 = new BoardResDto(boardPosition);
+        result.add(temp2);
+        BoardResDto temp3 = new BoardResDto(boardMbti);
+        result.add(temp3);
         return result;
-    } //내 게시판 조회
-
-//    public ArrayList<BoardResDto> getMyBoard(Long userId){
-//        ArrayList<Board> data = boardRepository.findByUserId(userId);
-//        ArrayList<BoardResDto> result = new ArrayList<>();
-//
-//        for (Board board : data){
-//            BoardResDto temp = new BoardResDto(board);
-//            result.add(temp);
-//        }
-//        return result;
-//    } //내 게시판 조회
+    }
 }

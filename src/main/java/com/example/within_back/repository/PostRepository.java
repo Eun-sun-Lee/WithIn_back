@@ -8,7 +8,4 @@ import java.util.ArrayList;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    public ArrayList<Post> findByCategory(String category);
-
-
 }

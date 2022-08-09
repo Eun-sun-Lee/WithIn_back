@@ -10,17 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostService {
 
     @Autowired
-    static
     PostRepository postRepository;
+    @Autowired
     BoardRepository boardRepository;
 
-    public static ArrayList<PostResDto> getPosts(String category){
-        ArrayList<Post> data = postRepository.findByCategory(category);
+    public ArrayList<PostResDto> getPosts(String category){
+        Board board = boardRepository.findByCategory(category);
+        List<Post> data= board.getPosts();
         ArrayList<PostResDto> result = new ArrayList<>();
         for(Post post : data) {
             PostResDto temp = new PostResDto(post);

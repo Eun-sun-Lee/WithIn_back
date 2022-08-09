@@ -28,17 +28,17 @@ public class Post extends BaseTimeEntity{
 
     private String content;
 
-    private int like;
+    private int liked;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
 
     @Builder
-    public Post(Board board, User author, String title, String content, int like) {
+    public Post(Board board, User author, String title, String content, int liked) {
         this.board = board;
         this.author = author;
         this.title = title;
         this.content = content;
-        this.like = like;
+        this.liked = liked;
     }
 }
