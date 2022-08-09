@@ -1,5 +1,6 @@
 package com.example.within_back.controller;
 
+import com.example.within_back.dto.HobbyReqDto;
 import com.example.within_back.dto.HobbyResDto;
 import com.example.within_back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,4 +19,8 @@ public class UserController {
         return userService.getHobby(userId);
     }
 
+    @PutMapping("/{userId}/myGroup")
+    public void updateHobby(@PathVariable Long userId, @RequestBody HobbyReqDto hobbyReqDto) {
+        userService.updateHobby(userId, hobbyReqDto);
+    }
 }

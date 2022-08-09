@@ -1,5 +1,6 @@
 package com.example.within_back.service;
 
+import com.example.within_back.dto.HobbyReqDto;
 import com.example.within_back.dto.HobbyResDto;
 import com.example.within_back.entity.Hobby;
 import com.example.within_back.entity.User;
@@ -27,5 +28,14 @@ public class UserService {
             result.add(temp);
         }
         return result;
+    }
+
+    public void updateHobby(Long userId, HobbyReqDto hobbyReqDto) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 USER ID입니다."));
+        hobbyRepository.save(hobbyReqDto.toHobbyEntity(user));
+        String email = user.getEmail();
+        String nickname = user.getNickname();
+        String myPost = user.getMyPost();
+        userRepository.save(hobbyReqDto.toUserEntity(email, nickname, myPost));
     }
 }
