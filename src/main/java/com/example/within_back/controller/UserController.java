@@ -13,6 +13,7 @@ public class UserController {
 
     @GetMapping("/user/emailList")
     public boolean isEmailRepeat(@RequestParam("email") String email) {
+
         return userService.isEmailRepeat(email);
     }
 

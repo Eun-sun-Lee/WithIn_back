@@ -23,8 +23,8 @@ public class PostController {
     }
 
     @PostMapping("/boards/{postId}/comments")
-    public Long writeComment(@PathVariable Long postId, @RequestBody CommentReqDto commentReqDto) {
+    public Long writeComment(@PathVariable Long postId, @RequestParam Long authorId, @RequestBody CommentReqDto commentReqDto) {
 
-        return postService.writeComment(postId, commentReqDto);
+        return postService.writeComment(postId, authorId, commentReqDto);
     }
 }
