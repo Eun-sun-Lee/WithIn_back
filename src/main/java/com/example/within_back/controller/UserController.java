@@ -34,8 +34,9 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/messages/{partnerId}")
-    private ArrayList<MessageResDto> getMessagesWithPartner(@PathVariable Long userId, @PathVariable Long partnerId){
+    private ArrayList<MessageResDto> getMessagesWithPartner(@PathVariable Long userId, @PathVariable Long partnerId) {
         return userService.getMessagesWithPartner(userId, partnerId);
+    }
 
     @GetMapping("/{userId}/myGroup")
     public ArrayList<HobbyResDto> getHobby(@PathVariable Long userId) {
@@ -45,6 +46,7 @@ public class UserController {
     @PutMapping("/{userId}/myGroup")
     public void updateHobby(@PathVariable Long userId, @RequestBody HobbyReqDto hobbyReqDto) {
         userService.updateHobby(userId, hobbyReqDto);
+    }
 
     @GetMapping("/user/emailList")
     public boolean isEmailRepeat(@RequestParam("email") String email) {
