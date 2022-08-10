@@ -12,6 +12,7 @@ import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
@@ -50,6 +51,7 @@ public class UserService {
         return result;
     }
 
+    @Transactional
     public Long sendMessage(Long userId, Long partnerId, MessageReqDto messageReqDto) throws IllegalArgumentException{
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
         User partner = userRepository.findById(partnerId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
