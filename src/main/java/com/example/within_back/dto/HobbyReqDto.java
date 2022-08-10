@@ -5,26 +5,21 @@ import com.example.within_back.entity.User;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class HobbyReqDto implements Serializable {
-    private Long id;
     private User user;
-    private String category;
     private String army;
     private String position;
     private String mbti;
+    private ArrayList<String> categories = new ArrayList<String>();
 
-    public HobbyReqDto(Hobby hobby, User user){
-        this.id = hobby.getId();
-        this.user = hobby.getUser();
-        this.category = hobby.getCategory();
-        this.army = user.getArmy();
-        this.position = user.getPosition();
-        this.mbti = user.getMbti();
+    public ArrayList<String> getCategories() {
+        return categories;
     }
 
-    public Hobby toHobbyEntity(User user) {
+    public Hobby toHobbyEntity(String category) {
         return new Hobby(user, category);
     }
 
