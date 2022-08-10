@@ -4,6 +4,9 @@ import com.example.within_back.entity.Post;
 
 import java.time.LocalDateTime;
 
+import lombok.Getter;
+
+@Getter
 public class PostResDto {
 
     private Long id;
@@ -23,6 +26,6 @@ public class PostResDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getModifiedAt();
-        this.like = post.getLike();
+        this.createdAt = getCreatedAt();
     }
 }
