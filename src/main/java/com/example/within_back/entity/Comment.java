@@ -25,7 +25,7 @@ public class Comment extends BaseTimeEntity{
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "author_id")
     private User author;
 
     private String content;
