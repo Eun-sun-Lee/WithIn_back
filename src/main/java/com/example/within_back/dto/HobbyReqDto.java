@@ -3,13 +3,13 @@ package com.example.within_back.dto;
 import com.example.within_back.entity.Hobby;
 import com.example.within_back.entity.User;
 import com.example.within_back.repository.UserRepository;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Getter
 public class HobbyReqDto implements Serializable {
     @Autowired
     UserRepository userRepository;
