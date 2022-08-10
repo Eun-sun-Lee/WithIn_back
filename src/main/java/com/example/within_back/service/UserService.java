@@ -35,7 +35,6 @@ public class UserService {
         hobbyRepository.save(hobbyReqDto.toHobbyEntity(user));
         String email = user.getEmail();
         String nickname = user.getNickname();
-        String myPost = user.getMyPost();
-        userRepository.save(hobbyReqDto.toUserEntity(email, nickname, myPost));
+        userRepository.save(hobbyReqDto.toUserEntity(email, nickname));
     }
 }
