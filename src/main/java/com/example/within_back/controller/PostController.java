@@ -18,9 +18,14 @@ public class PostController {
 
     @Autowired
     PostService postService;
-    
+
     @Autowired
     UserService userService;
+
+    @PutMapping("/boards/{postId}/likes")
+    private int addLikes(@PathVariable Long postId) {
+        return postService.addLikes(postId);
+    }
 
     @RequestMapping(value="/{userId}/boards", method= RequestMethod.GET)
     public ArrayList<BoardResDto> getMyBoard(@PathVariable Long userId) throws Exception {

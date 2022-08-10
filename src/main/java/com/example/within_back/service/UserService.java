@@ -18,7 +18,7 @@ import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.within_back.dto.HobbyReqDto;
-import org.springframework.transaction.annotation.Transactional
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -64,21 +64,23 @@ public class UserService {
         return result;
     }
 
+    @Transactional
     public Long sendMessage(Long userId, Long partnerId, MessageReqDto messageReqDto) throws IllegalArgumentException{
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
         User partner = userRepository.findById(partnerId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user id입니다."));
         return messageRepository.save(messageReqDto.toEntity(user, partner)).getId();
     }
 
-    public ArrayList<MessageResDto> getMessagesWithPartner(Long userId, Long partnerId){
+    public ArrayList<MessageResDto> getMessagesWithPartner(Long userId, Long partnerId) {
         ArrayList<Message> data = messageRepository.findByUserIdAndPartnerId(userId, partnerId);
 
         ArrayList<MessageResDto> result = new ArrayList<>();
-        for(Message message : data){
+        for (Message message : data) {
             result.add(new MessageResDto(message));
         }
 
         return result;
+    }
 
     public ArrayList<BoardResDto> getMyBoard(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 user가 없습니다."));
@@ -136,7 +138,7 @@ public class UserService {
         String nickname = user.getNickname();
         userRepository.save(hobbyReqDto.toUserEntity(email, nickname));
     }
-}
+
     @Transactional
     public boolean isEmailRepeat(String email) {
         return (userRepository.findByEmail(email) == null) ? false : true;

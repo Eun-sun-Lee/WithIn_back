@@ -16,7 +16,7 @@ public class PostResDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private int like;
+    private int liked;
 
     public PostResDto(Post post) {
         this.id = post.getId();
@@ -26,6 +26,6 @@ public class PostResDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getModifiedAt();
-        this.createdAt = getCreatedAt();
+        this.liked = post.getLiked();
     }
 }
