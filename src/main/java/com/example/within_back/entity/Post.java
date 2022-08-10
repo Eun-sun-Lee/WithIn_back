@@ -17,8 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"commentList", "board_id", "user_id"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Post extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

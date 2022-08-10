@@ -15,8 +15,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"post_id", "user_id"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Comment extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

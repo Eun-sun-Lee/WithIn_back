@@ -10,6 +10,7 @@ import com.example.within_back.repository.PostRepository;
 import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class PostService {
         return result;
     }
 
+    @Transactional
     public Long writeComment(Long postId, Long authorId, CommentReqDto commentReqDto) {
         User Author = userRepository.findById(authorId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 user id 입니다."));
         Post post = postRepository.findById(postId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 post id 입니다."));

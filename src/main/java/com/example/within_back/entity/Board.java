@@ -16,8 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "posts")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

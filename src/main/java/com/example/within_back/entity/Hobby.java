@@ -14,8 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "user_id")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

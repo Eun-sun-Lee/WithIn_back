@@ -16,8 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"myHobbies", "myMessages", "myPosts", "myComments"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nickname")
-@JsonIdentityReference(alwaysAsId = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

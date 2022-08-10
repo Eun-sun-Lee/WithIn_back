@@ -14,8 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"user_id", "partner_id"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Message extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
