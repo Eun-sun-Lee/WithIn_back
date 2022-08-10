@@ -3,11 +3,13 @@ package com.example.within_back.dto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Post;
 import com.example.within_back.entity.User;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class PostReqDto {
-    private User author;
+    private User author; //삭제 필요
     private String title;
     private String content;
     private LocalDateTime createdAt;

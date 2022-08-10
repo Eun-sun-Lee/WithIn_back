@@ -1,9 +1,11 @@
 package com.example.within_back.dto;
 
 import com.example.within_back.entity.Post;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class PostResDto {
 
     private Long id;
@@ -11,7 +13,7 @@ public class PostResDto {
     private String authorNickname;
     private String title;
     private String content;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; //필요
     private LocalDateTime updatedAt;
     private int like;
 

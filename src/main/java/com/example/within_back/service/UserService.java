@@ -10,14 +10,18 @@ import com.example.within_back.repository.HobbyRepository;
 import com.example.within_back.repository.PostRepository;
 import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+@Service
 public class UserService {
 
     @Autowired
     BoardRepository boardRepository;
+    @Autowired
     UserRepository userRepository;
+    @Autowired
     HobbyRepository hobbyRepository;
 
     public ArrayList<BoardResDto> getMyBoard(Long userId) {

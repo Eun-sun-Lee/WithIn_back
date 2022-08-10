@@ -16,6 +16,7 @@ public class PostController {
 
     @Autowired
     PostService postService;
+    @Autowired
     UserService userService;
 
     @RequestMapping(value="/{userId}/boards", method= RequestMethod.GET)
@@ -44,7 +45,7 @@ public class PostController {
 
 
 
-    @RequestMapping(value="/boards/{postId}", method=RequestMethod.GET)
+    @RequestMapping(value="/boards/posts/{postId}", method=RequestMethod.GET)
     public PostResDto findById(@PathVariable Long postId){
         return postService.findById(postId);
     } //게시글 조회
