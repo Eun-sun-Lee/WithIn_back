@@ -4,10 +4,13 @@ import com.example.within_back.dto.PostReqDto;
 import com.example.within_back.dto.PostResDto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Post;
+import com.example.within_back.entity.User;
 import com.example.within_back.repository.BoardRepository;
 import com.example.within_back.repository.PostRepository;
+import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,8 @@ public class PostService {
     PostRepository postRepository;
     @Autowired
     BoardRepository boardRepository;
+    @Autowired
+    UserRepository userRepository;
 
     public ArrayList<PostResDto> getPosts(String category){
         Board board = boardRepository.findByCategory(category);
@@ -33,9 +38,11 @@ public class PostService {
     //게시판 게시물 조회 (GET 방식)
 
 
-    public Long save(PostReqDto postReqDto, String category){
+    @Transactional
+    public Long save(PostReqDto postReqDto, String category,Long userId){
         Board board = boardRepository.findByCategory(category);
-        return postRepository.save(postReqDto.toEntity(board)).getId();
+        User author = userRepository.findById(userId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 user id 입니다."));
+        return postRepository.save(postReqDto.toEntity(board,author)).getId();
     } //게시물 작성 (POST 방식)
 
 

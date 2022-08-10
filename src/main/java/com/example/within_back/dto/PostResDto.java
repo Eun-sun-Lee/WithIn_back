@@ -13,7 +13,7 @@ public class PostResDto {
     private String authorNickname;
     private String title;
     private String content;
-    private LocalDateTime createdAt; //필요
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int like;
 
@@ -24,5 +24,6 @@ public class PostResDto {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.like = post.getLiked();
+        this.createdAt=getCreatedAt();
     }
 }

@@ -50,5 +50,5 @@ public class UserService {
         BoardResDto temp3 = new BoardResDto(boardMbti);
         result.add(temp3);
         return result;
-    }
+    } //내 게시판 불러오기
 }
