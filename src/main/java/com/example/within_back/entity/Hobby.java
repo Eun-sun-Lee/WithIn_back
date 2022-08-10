@@ -3,12 +3,14 @@ package com.example.within_back.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @Getter
+@ToString(exclude = "user_id")
 public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

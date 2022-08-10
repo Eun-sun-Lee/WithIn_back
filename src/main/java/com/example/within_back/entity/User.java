@@ -3,6 +3,7 @@ package com.example.within_back.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,14 +12,14 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@ToString(exclude = {"myHobbies", "myMessages", "myPosts", "myComments"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String email;
     private String nickname;
-
-    private String myPost;
 
     private String army;
 
@@ -39,9 +40,9 @@ public class User {
     private List<Comment> myComments = new ArrayList();
 
     @Builder
-    public User(String nickname, String myPost, String army, String position, String mbti) {
+    public User(String email, String nickname, String army, String position, String mbti) {
+        this.email = email;
         this.nickname = nickname;
-        this.myPost = myPost;
         this.army = army;
         this.position = position;
         this.mbti = mbti;
