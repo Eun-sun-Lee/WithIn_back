@@ -1,5 +1,9 @@
 package com.example.within_back.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,24 +27,24 @@ public class Post extends BaseTimeEntity{
     private Board board;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "author_id")
     private User author;
 
     private String title;
 
     private String content;
 
-    private int like;
+    private int liked;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
 
     @Builder
-    public Post(Board board, User author, String title, String content, int like) {
+    public Post(Board board, User author, String title, String content, int liked) {
         this.board = board;
         this.author = author;
         this.title = title;
         this.content = content;
-        this.like = like;
+        this.liked = liked;
     }
 }

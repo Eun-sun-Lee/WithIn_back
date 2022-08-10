@@ -22,5 +22,15 @@ public class UserController {
     @PutMapping("/{userId}/myGroup")
     public void updateHobby(@PathVariable Long userId, @RequestBody HobbyReqDto hobbyReqDto) {
         userService.updateHobby(userId, hobbyReqDto);
+
+    @GetMapping("/user/emailList")
+    public boolean isEmailRepeat(@RequestParam("email") String email) {
+
+        return userService.isEmailRepeat(email);
+    }
+
+    @GetMapping("/user/nicknameList")
+    public boolean isNicknameRepeat(@RequestParam("nickname") String nickname) {
+        return userService.isNicknameRepeat(nickname);
     }
 }
