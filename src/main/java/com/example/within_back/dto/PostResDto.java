@@ -4,6 +4,9 @@ import com.example.within_back.entity.Post;
 
 import java.time.LocalDateTime;
 
+import lombok.Getter;
+
+@Getter
 public class PostResDto {
 
     private Long id;
