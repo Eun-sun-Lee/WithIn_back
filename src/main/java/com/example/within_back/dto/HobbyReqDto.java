@@ -11,10 +11,6 @@ import java.util.ArrayList;
 
 @Getter
 public class HobbyReqDto implements Serializable {
-    @Autowired
-    UserRepository userRepository;
-
-    private Long userId;
     private String army;
     private String position;
     private String mbti;
@@ -24,8 +20,7 @@ public class HobbyReqDto implements Serializable {
         return categories;
     }
 
-    public Hobby toHobbyEntity(Long userId, String category) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 USER ID입니다."));
+    public Hobby toHobbyEntity(User user, String category) {
         return new Hobby(user, category);
     }
 

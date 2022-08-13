@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @RestController
@@ -19,8 +20,9 @@ public class MenuController {
     MenuService menuService;
 
     @GetMapping("/{date}/{bld}")
-    public ArrayList<MenuResDto> getMenu(@PathVariable LocalDate date, @PathVariable String bld){
-        return menuService.getMenu(date, bld);
+    public ArrayList<MenuResDto> getMenu(@PathVariable String date, @PathVariable String bld){
+        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        return menuService.getMenu(localDate, bld);
     }
 }
 

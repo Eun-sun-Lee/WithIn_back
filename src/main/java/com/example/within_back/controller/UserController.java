@@ -44,8 +44,8 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/myGroup")
-    public void updateHobby(@PathVariable Long userId, @RequestBody HobbyReqDto hobbyReqDto) {
-        userService.updateHobby(userId, hobbyReqDto);
+    public Boolean updateHobby(@PathVariable Long userId, @RequestBody HobbyReqDto hobbyReqDto) {
+        return userService.updateHobby(userId, hobbyReqDto);
     }
 
     @GetMapping("/user/emailList")
