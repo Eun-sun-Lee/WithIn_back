@@ -22,8 +22,4 @@ public class HobbyReqDto implements Serializable {
     public Hobby toHobbyEntity(User user, String category) {
         return new Hobby(user, category);
     }
-
-    public User toUserEntity(String email, String nickname) {
-        return new User(email, nickname, army, position, mbti);
-    }
 }
