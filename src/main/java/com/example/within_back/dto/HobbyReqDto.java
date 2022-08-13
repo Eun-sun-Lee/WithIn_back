@@ -19,7 +19,6 @@ public class HobbyReqDto implements Serializable {
     public ArrayList<String> getCategories() {
         return categories;
     }
-
     public Hobby toHobbyEntity(User user, String category) {
         return new Hobby(user, category);
     }
