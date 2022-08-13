@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-@ToString(exclude = {"user_id", "partner_id"})
+@ToString(exclude = {"user", "partner"})
 public class Message extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

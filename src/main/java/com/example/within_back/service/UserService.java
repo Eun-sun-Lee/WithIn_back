@@ -150,4 +150,8 @@ public class UserService {
     public boolean isNicknameRepeat(String nickname) {
         return (userRepository.findByNickname(nickname) == null) ? false : true;
     }
+
+    public Long getUserId(String uid){
+        return userRepository.findByUid(uid).getId();
+    }
 }
