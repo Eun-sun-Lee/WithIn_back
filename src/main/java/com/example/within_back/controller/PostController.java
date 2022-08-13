@@ -19,14 +19,14 @@ public class PostController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value="/{userId}/boards", method= RequestMethod.GET)
+    @RequestMapping(value = "/{userId}/boards", method = RequestMethod.GET)
     public ArrayList<BoardResDto> getMyBoard(@PathVariable Long userId) throws Exception {
         return userService.getMyBoard(userId);
 
     } //내 게시판 조회
 
-    @RequestMapping(value="/boards/{category}", method=RequestMethod.GET)
-    public ArrayList<PostResDto> getPosts(@PathVariable String category){
+    @RequestMapping(value = "/boards/{category}", method = RequestMethod.GET)
+    public ArrayList<PostResDto> getPosts(@PathVariable String category) {
         return postService.getPosts(category);
     }
     //게시판 게시물 조회 (GET 방식)
@@ -38,14 +38,14 @@ public class PostController {
 //        return
 //    } //게시물 작성 (POST 방식)
 
-    @RequestMapping(value="/boards/{category}", method=RequestMethod.POST)
-    public Long save(@RequestBody PostReqDto postResDto, @PathVariable String category, @RequestParam("userId") Long userId){
-        return postService.save(postResDto,category,userId);
+    @RequestMapping(value = "/boards/{category}", method = RequestMethod.POST)
+    public Long save(@RequestBody PostReqDto postResDto, @PathVariable String category, @RequestParam("userId") Long userId) {
+        return postService.save(postResDto, category, userId);
     } //게시물 작성 (POST 방식)
 
-    @RequestMapping(value="/boards/posts/{postId}", method=RequestMethod.GET)
-    public PostResDto findById(@PathVariable Long postId){
-        return postService.findById(postId);
+    @RequestMapping(value = "/boards/posts/{postId}", method = RequestMethod.GET)
+    public PostResDto getPost(@PathVariable Long postId) {
+        return postService.getPost(postId);
     } //게시글 조회
 }
 

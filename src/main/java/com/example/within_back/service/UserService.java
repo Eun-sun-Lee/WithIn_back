@@ -1,13 +1,11 @@
 package com.example.within_back.service;
 
 import com.example.within_back.dto.BoardResDto;
-import com.example.within_back.dto.HobbyResDto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Hobby;
 import com.example.within_back.entity.User;
 import com.example.within_back.repository.BoardRepository;
 import com.example.within_back.repository.HobbyRepository;
-import com.example.within_back.repository.PostRepository;
 import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

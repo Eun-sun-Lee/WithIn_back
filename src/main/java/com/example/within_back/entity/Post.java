@@ -3,6 +3,7 @@ package com.example.within_back.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@ToString(exclude = {"commentList", "board_id", "user_id"})
 public class Post extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +31,8 @@ public class Post extends BaseTimeEntity{
     private String content;
 
     private int liked;
+
+    private int commentCount;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
