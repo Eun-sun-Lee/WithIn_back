@@ -6,6 +6,7 @@ import com.example.within_back.dto.PostResDto;
 import com.example.within_back.dto.HobbyReqDto;
 import com.example.within_back.dto.HobbyResDto;
 import com.example.within_back.service.UserService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +58,10 @@ public class UserController {
     @GetMapping("/user/nicknameList")
     public boolean isNicknameRepeat(@RequestParam("nickname") String nickname) {
         return userService.isNicknameRepeat(nickname);
+    }
+
+    @GetMapping("/user/{uid}")
+    public Long getUserId(@PathVariable String uid){
+        return userService.getUserId(uid);
     }
 }

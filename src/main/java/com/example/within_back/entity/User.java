@@ -19,13 +19,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String uid;
     private String email;
     private String nickname;
-
     private String army;
-
     private String position;
-
     private String mbti;
 
 //    @OneToMany(mappedBy = "user")
