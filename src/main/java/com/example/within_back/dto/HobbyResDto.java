@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Getter
 public class HobbyResDto implements Serializable {
     private Long id;
-    private User user;
     private String category;
     private String army;
     private String position;
@@ -18,7 +17,6 @@ public class HobbyResDto implements Serializable {
 
     public HobbyResDto(Hobby hobby, User user){
         this.id = hobby.getId();
-        this.user = hobby.getUser();
         this.category = hobby.getCategory();
         this.army = user.getArmy();
         this.position = user.getPosition();

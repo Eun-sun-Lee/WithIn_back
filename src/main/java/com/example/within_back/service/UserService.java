@@ -121,22 +121,22 @@ public class UserService {
         return result;
     }
 
-    public void updateHobby(Long userId, HobbyReqDto hobbyReqDto) {
+    @Transactional
+    public Boolean updateHobby(Long userId, HobbyReqDto hobbyReqDto) {
         ArrayList<String> categories = hobbyReqDto.getCategories();
-        for (String category : categories) {
-            hobbyRepository.save(hobbyReqDto.toHobbyEntity(userId, category));
-        }
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 USER ID입니다."));
-        String category = user.getArmy();
-        hobbyRepository.save(hobbyReqDto.toHobbyEntity(userId, category));
-        category = user.getPosition();
-        hobbyRepository.save(hobbyReqDto.toHobbyEntity(userId, category));
-        category = user.getMbti();
-        hobbyRepository.save(hobbyReqDto.toHobbyEntity(userId, category));
 
-        String email = user.getEmail();
-        String nickname = user.getNickname();
-        userRepository.save(hobbyReqDto.toUserEntity(email, nickname));
+        user.setArmy(hobbyReqDto.getArmy());
+        user.setPosition(hobbyReqDto.getPosition());
+        user.setMbti(hobbyReqDto.getMbti());
+        userRepository.save(user);
+
+        hobbyRepository.deleteByUserId(user.getId());
+        for (String category : categories) {
+            hobbyRepository.save(hobbyReqDto.toHobbyEntity(user, category));
+        }
+
+        return true;
     }
 
     @Transactional

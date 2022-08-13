@@ -1,9 +1,11 @@
 package com.example.within_back.dto;
 
 import com.example.within_back.entity.Menu;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
+@Getter
 public class MenuResDto {
 
     private Long id;
