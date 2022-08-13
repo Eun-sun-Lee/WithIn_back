@@ -39,7 +39,8 @@ public class User {
     private List<Comment> myComments = new ArrayList();
 
     @Builder
-    public User(String email, String nickname, String army, String position, String mbti) {
+    public User(String uid, String email, String nickname, String army, String position, String mbti) {
+        this.uid = uid;
         this.email = email;
         this.nickname = nickname;
         this.army = army;

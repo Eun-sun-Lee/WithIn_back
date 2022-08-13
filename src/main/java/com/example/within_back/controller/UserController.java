@@ -1,10 +1,6 @@
 package com.example.within_back.controller;
 
-import com.example.within_back.dto.MessageReqDto;
-import com.example.within_back.dto.MessageResDto;
-import com.example.within_back.dto.PostResDto;
-import com.example.within_back.dto.HobbyReqDto;
-import com.example.within_back.dto.HobbyResDto;
+import com.example.within_back.dto.*;
 import com.example.within_back.service.UserService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +59,10 @@ public class UserController {
     @GetMapping("/user/{uid}")
     public Long getUserId(@PathVariable String uid){
         return userService.getUserId(uid);
+    }
+
+    @PostMapping("/create")
+    public Long createUser(@RequestBody UserReqDto userReqDto){
+        return userService.createUser(userReqDto);
     }
 }

@@ -1,14 +1,10 @@
 package com.example.within_back.service;
 
-import com.example.within_back.dto.MessageReqDto;
-import com.example.within_back.dto.MessageResDto;
-import com.example.within_back.dto.PostResDto;
+import com.example.within_back.dto.*;
 import com.example.within_back.entity.Message;
 import com.example.within_back.entity.Post;
 import com.example.within_back.entity.User;
 import com.example.within_back.repository.MessageRepository;
-import com.example.within_back.dto.BoardResDto;
-import com.example.within_back.dto.HobbyResDto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Hobby;
 import com.example.within_back.repository.BoardRepository;
@@ -17,7 +13,6 @@ import com.example.within_back.repository.PostRepository;
 import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.within_back.dto.HobbyReqDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -153,5 +148,10 @@ public class UserService {
 
     public Long getUserId(String uid){
         return userRepository.findByUid(uid).getId();
+    }
+
+    public Long createUser(UserReqDto userReqDto){
+        User user = userReqDto.toEntity();
+        return userRepository.save(user).getId();
     }
 }
