@@ -9,5 +9,4 @@ import java.util.ArrayList;
 @Repository
 public interface HobbyRepository extends JpaRepository<Hobby, Long> {
     public ArrayList<Hobby> findByUserId(Long userId);
-
 }
