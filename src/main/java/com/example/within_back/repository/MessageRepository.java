@@ -24,5 +24,9 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             "order by created_at desc", nativeQuery = true)
     ArrayList<Message> findMyMessages(@Param("userId") Long userId);
 
-    ArrayList<Message> findByUserIdAndPartnerId(Long userId, Long partnerId);
+    @Query(value = "select *\n" +
+            "from message\n" +
+            "where (user_id = :userId and partner_id = :partnerId) or (user_id = :partnerId and partner_id = :userId)\n" +
+            "order by created_at", nativeQuery = true)
+    ArrayList<Message> findByUserIdAndPartnerId(@Param("userId") Long userId, @Param("partnerId") Long partnerId);
 }

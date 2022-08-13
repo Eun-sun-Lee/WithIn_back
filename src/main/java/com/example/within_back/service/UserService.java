@@ -72,11 +72,12 @@ public class UserService {
     }
 
     public ArrayList<MessageResDto> getMessagesWithPartner(Long userId, Long partnerId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 user id입니다."));
         ArrayList<Message> data = messageRepository.findByUserIdAndPartnerId(userId, partnerId);
 
         ArrayList<MessageResDto> result = new ArrayList<>();
         for (Message message : data) {
-            result.add(new MessageResDto(message));
+            result.add(new MessageResDto(message, user));
         }
 
         return result;
