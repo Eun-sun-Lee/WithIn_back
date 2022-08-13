@@ -53,7 +53,5 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
         int commentCount = commentRepository.countByPostId(postId);
         return new PostResDto(post, commentCount);
-
-
     } //게시글 조회
 }

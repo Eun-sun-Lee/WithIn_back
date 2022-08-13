@@ -32,8 +32,6 @@ public class Post extends BaseTimeEntity{
 
     private int liked;
 
-    private int commentCount;
-
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
 

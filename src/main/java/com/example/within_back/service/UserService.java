@@ -9,7 +9,6 @@ import com.example.within_back.repository.HobbyRepository;
 import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service
@@ -30,10 +29,8 @@ public class UserService {
         Board boardArmy = boardRepository.findByCategory(army);
         Board boardPosition = boardRepository.findByCategory(position);
         Board boardMbti = boardRepository.findByCategory(mbti);
-
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<BoardResDto> result = new ArrayList<>();
-
 
         for (Hobby hobby : data) {
             String hobbyCategory = hobby.getCategory();
