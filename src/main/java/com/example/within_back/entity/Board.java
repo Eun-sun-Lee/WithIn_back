@@ -28,6 +28,10 @@ public class Board {
     @OneToMany(mappedBy = "board")
     private List<Post> posts = new ArrayList();
 
+    @ManyToOne
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
+
     @Builder
     public Board(String boardName, String category){
         this.boardName = boardName;

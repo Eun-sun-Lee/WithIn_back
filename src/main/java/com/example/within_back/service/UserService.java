@@ -2,11 +2,14 @@ package com.example.within_back.service;
 
 import com.example.within_back.dto.BoardResDto;
 import com.example.within_back.dto.HobbyResDto;
+import com.example.within_back.dto.UnitResDto;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Hobby;
+import com.example.within_back.entity.Unit;
 import com.example.within_back.entity.User;
 import com.example.within_back.repository.BoardRepository;
 import com.example.within_back.repository.HobbyRepository;
+import com.example.within_back.repository.UnitRepository;
 import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +45,7 @@ public class UserService {
             BoardResDto temp = new BoardResDto(boardHobby);
             result.add(temp);
         }
+
         BoardResDto temp1 = new BoardResDto(boardArmy);
         result.add(temp1);
         BoardResDto temp2 = new BoardResDto(boardPosition);
@@ -89,5 +93,11 @@ public class UserService {
     @Transactional
     public boolean isNicknameRepeat(String nickname) {
         return (userRepository.findByNickname(nickname) == null) ? false : true;
+    }
+
+    public UnitResDto getUnit(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 user id 입니다."));
+        Unit unit = user.getUnit();
+        return new UnitResDto(unit);
     }
 }

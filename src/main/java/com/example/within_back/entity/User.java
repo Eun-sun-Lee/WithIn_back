@@ -42,6 +42,10 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Comment> myComments = new ArrayList();
 
+    @ManyToOne
+    @JoinColumn(name = "unitId")
+    private Unit unit;
+
     @Builder
     public User(String email, String nickname, String army, String position, String mbti) {
         this.email = email;

@@ -1,13 +1,10 @@
 package com.example.within_back.service;
 
-import com.example.within_back.dto.PostReqDto;
-import com.example.within_back.dto.PostResDto;
+import com.example.within_back.dto.*;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Post;
 import com.example.within_back.entity.User;
 import com.example.within_back.repository.BoardRepository;
-import com.example.within_back.dto.CommentReqDto;
-import com.example.within_back.dto.CommentsResDto;
 import com.example.within_back.entity.Comment;
 import com.example.within_back.repository.CommentRepository;
 import com.example.within_back.repository.PostRepository;
@@ -31,8 +28,8 @@ public class PostService {
     @Autowired
     UserRepository userRepository;
 
-    public ArrayList<PostResDto> getPosts(String category) {
-        Board board = boardRepository.findByCategory(category);
+    public ArrayList<PostResDto> getPosts(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 board id 입니다."));
         List<Post> data = board.getPosts();
         ArrayList<PostResDto> result = new ArrayList<>();
         for (Post post : data) {

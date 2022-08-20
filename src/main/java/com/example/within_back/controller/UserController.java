@@ -2,6 +2,7 @@ package com.example.within_back.controller;
 
 import com.example.within_back.dto.HobbyReqDto;
 import com.example.within_back.dto.HobbyResDto;
+import com.example.within_back.dto.UnitResDto;
 import com.example.within_back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class UserController {
     @GetMapping("/user/nicknameList")
     public boolean isNicknameRepeat(@RequestParam("nickname") String nickname) {
         return userService.isNicknameRepeat(nickname);
+    }
+
+    @GetMapping("/{userId}/unit")
+    public UnitResDto getUnit(@PathVariable Long userId) {
+        return userService.getUnit(userId);
     }
 }
