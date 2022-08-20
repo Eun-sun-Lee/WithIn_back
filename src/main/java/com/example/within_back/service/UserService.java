@@ -33,6 +33,9 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    LikeRepository likeRepository;
+
+    @Autowired
     CommentRepository commentRepository;
     public ArrayList<PostResDto> getMyPosts(Long userId){
         ArrayList<Post> data = postRepository.findByAuthorId(userId);
@@ -41,7 +44,8 @@ public class UserService {
 
         for(Post post : data){
             int commentCount = commentRepository.countByPostId(post.getId());
-            result.add(new PostResDto(post, commentCount));
+            int likeCount = likeRepository.countByPostId(post.getId());
+            result.add(new PostResDto(post, likeCount, commentCount));
         }
 
         return result;
