@@ -43,10 +43,11 @@ public class PostController {
 //    } //게시물 작성 (POST 방식)
 
 
-    @RequestMapping(value="/boards/{category}", method=RequestMethod.POST)
-    public Long save(@RequestBody PostReqDto postResDto, @PathVariable String category, @RequestParam("userId") Long userId){
-        return postService.save(postResDto,category,userId);
-    } //게시물 작성 (POST 방식)
+    @RequestMapping(value="/boards/{boardId}/post", method=RequestMethod.POST)
+    public Long postPost(@PathVariable Long boardId, @RequestParam("userId") Long userId, @RequestBody PostReqDto postResDto){
+        return postService.postPost(boardId, userId, postResDto);
+    }
+    //게시물 작성 (POST 방식)
 
     @RequestMapping(value = "/boards/posts/{postId}", method = RequestMethod.GET)
     public PostResDto getPost(@PathVariable Long postId) {
