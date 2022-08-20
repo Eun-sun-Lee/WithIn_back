@@ -19,7 +19,7 @@ public class PostResDto {
     private int likeCount;
     private int commentCount;
 
-    public PostResDto(Post post, int commentCount) {
+    public PostResDto(Post post, int likeCount, int commentCount) {
         this.id = post.getId();
         this.boardName = post.getBoard().getBoardName();
         this.authorNickname = post.getAuthor().getNickname();
@@ -27,7 +27,7 @@ public class PostResDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getModifiedAt();
-        this.likeCount = post.getLiked();
+        this.likeCount = likeCount;
         this.commentCount = commentCount;
     }
 }

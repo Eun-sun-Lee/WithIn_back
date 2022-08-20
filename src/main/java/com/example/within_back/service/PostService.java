@@ -33,12 +33,12 @@ public class PostService {
     @Autowired
     UnitRepository unitRepository;
 
-    public int addLikes(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 post id입니다."));
-        post.setLiked(post.getLiked() + 1);
-        postRepository.save(post);
-        return post.getLiked();
-    }
+//    public int addLikes(Long postId) {
+//        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 post id입니다."));
+//        post.setLiked(post.getLiked() + 1);
+//        postRepository.save(post);
+//        return post.getLiked();
+//    }
 
     public ArrayList<PostResDto> getPosts(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 board id 입니다."));
@@ -46,7 +46,8 @@ public class PostService {
         ArrayList<PostResDto> result = new ArrayList<>();
         for (Post post : data) {
             int commentCount = commentRepository.countByPostId(post.getId());
-            PostResDto temp = new PostResDto(post, commentCount);
+            int likeCount = likeRepository.countByPostId(post.getId());
+            PostResDto temp = new PostResDto(post, likeCount, commentCount);
             result.add(temp);
         }
         return result;
@@ -65,7 +66,8 @@ public class PostService {
     public PostResDto getPost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
         int commentCount = commentRepository.countByPostId(postId);
-        return new PostResDto(post, commentCount);
+        int likeCount = likeRepository.countByPostId(post.getId());
+        return new PostResDto(post, likeCount, commentCount);
     } //게시글 조회
 
     public ArrayList<CommentsResDto> getComments(Long postId) {
