@@ -164,8 +164,9 @@ public class UserService {
         return (userRepository.findByNickname(nickname) == null) ? false : true;
     }
 
-    public Long getUserId(String uid){
-        return userRepository.findByUid(uid).getId();
+    public UserResDto getUserId(String uid){
+        User user = userRepository.findByUid(uid);
+        return new UserResDto(user.getId(), user.getNickname());
     }
 
     public Long createUser(UserReqDto userReqDto) {
