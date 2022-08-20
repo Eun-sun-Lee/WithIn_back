@@ -4,13 +4,10 @@ import com.example.within_back.dto.*;
 import com.example.within_back.entity.Message;
 import com.example.within_back.entity.Post;
 import com.example.within_back.entity.User;
-import com.example.within_back.repository.MessageRepository;
+import com.example.within_back.repository.*;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Hobby;
-import com.example.within_back.repository.BoardRepository;
-import com.example.within_back.repository.HobbyRepository;
-import com.example.within_back.repository.PostRepository;
-import com.example.within_back.repository.UserRepository;
+import com.example.within_back.entity.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,13 +32,16 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
     public ArrayList<PostResDto> getMyPosts(Long userId){
         ArrayList<Post> data = postRepository.findByAuthorId(userId);
 
         ArrayList<PostResDto> result = new ArrayList<>();
 
         for(Post post : data){
-            result.add(new PostResDto(post));
+            int commentCount = commentRepository.countByPostId(post.getId());
+            result.add(new PostResDto(post, commentCount));
         }
 
         return result;
@@ -86,10 +86,8 @@ public class UserService {
         Board boardArmy = boardRepository.findByCategory(army);
         Board boardPosition = boardRepository.findByCategory(position);
         Board boardMbti = boardRepository.findByCategory(mbti);
-
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<BoardResDto> result = new ArrayList<>();
-
 
         for (Hobby hobby : data) {
             String hobbyCategory = hobby.getCategory();
@@ -97,6 +95,7 @@ public class UserService {
             BoardResDto temp = new BoardResDto(boardHobby);
             result.add(temp);
         }
+
         BoardResDto temp1 = new BoardResDto(boardArmy);
         result.add(temp1);
         BoardResDto temp2 = new BoardResDto(boardPosition);
@@ -160,8 +159,14 @@ public class UserService {
         return userRepository.findByUid(uid).getId();
     }
 
-    public Long createUser(UserReqDto userReqDto){
+    public Long createUser(UserReqDto userReqDto) {
         User user = userReqDto.toEntity();
         return userRepository.save(user).getId();
+    }
+
+    public UnitResDto getUnit(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 user id 입니다."));
+        Unit unit = user.getUnit();
+        return new UnitResDto(unit);
     }
 }

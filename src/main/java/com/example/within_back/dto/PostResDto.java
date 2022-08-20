@@ -16,9 +16,10 @@ public class PostResDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private int liked;
+    private int likeCount;
+    private int commentCount;
 
-    public PostResDto(Post post) {
+    public PostResDto(Post post, int commentCount) {
         this.id = post.getId();
         this.boardName = post.getBoard().getBoardName();
         this.authorNickname = post.getAuthor().getNickname();
@@ -26,6 +27,7 @@ public class PostResDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getModifiedAt();
-        this.liked = post.getLiked();
+        this.likeCount = post.getLiked();
+        this.commentCount = commentCount;
     }
 }

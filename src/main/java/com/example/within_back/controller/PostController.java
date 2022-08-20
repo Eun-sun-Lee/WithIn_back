@@ -1,10 +1,6 @@
 package com.example.within_back.controller;
 
-import com.example.within_back.dto.BoardResDto;
-import com.example.within_back.dto.PostReqDto;
-import com.example.within_back.dto.PostResDto;
-import com.example.within_back.dto.CommentReqDto;
-import com.example.within_back.dto.CommentsResDto;
+import com.example.within_back.dto.*;
 import com.example.within_back.service.PostService;
 import com.example.within_back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,20 +29,28 @@ public class PostController {
 
     } //내 게시판 조회
 
-    @RequestMapping(value="/boards/{category}", method=RequestMethod.GET)
-    public ArrayList<PostResDto> getPosts(@PathVariable String category){
-        return postService.getPosts(category);
+    @RequestMapping(value = "/boards/{boardId}", method = RequestMethod.GET)
+    public ArrayList<PostResDto> getPosts(@PathVariable Long boardId) {
+        return postService.getPosts(boardId);
     }
     //게시판 게시물 조회 (GET 방식)
+
+
+//    @RequestMapping(value="/boards/{category}", method=RequestMethod.POST)
+//    public Long postWrite(@RequestBody PostResDto postResDto, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
+//        postService.postWrite(postResDto,multipartHttpServletRequest);
+//        return
+//    } //게시물 작성 (POST 방식)
+
 
     @RequestMapping(value="/boards/{category}", method=RequestMethod.POST)
     public Long save(@RequestBody PostReqDto postResDto, @PathVariable String category, @RequestParam("userId") Long userId){
         return postService.save(postResDto,category,userId);
     } //게시물 작성 (POST 방식)
 
-    @RequestMapping(value="/boards/posts/{postId}", method=RequestMethod.GET)
-    public PostResDto findById(@PathVariable Long postId){
-        return postService.findById(postId);
+    @RequestMapping(value = "/boards/posts/{postId}", method = RequestMethod.GET)
+    public PostResDto getPost(@PathVariable Long postId) {
+        return postService.getPost(postId);
     } //게시글 조회
 
     @GetMapping("/boards/{postId}/comments")
@@ -60,4 +64,5 @@ public class PostController {
 
         return postService.writeComment(postId, authorId, commentReqDto);
     }
+
 }
