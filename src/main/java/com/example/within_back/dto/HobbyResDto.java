@@ -9,17 +9,13 @@ import java.io.Serializable;
 
 @Getter
 public class HobbyResDto implements Serializable {
-    private Long id;
     private String category;
-    private String army;
-    private String position;
-    private String mbti;
 
-    public HobbyResDto(Hobby hobby, User user){
-        this.id = hobby.getId();
+    public HobbyResDto(Hobby hobby){
         this.category = hobby.getCategory();
-        this.army = user.getArmy();
-        this.position = user.getPosition();
-        this.mbti = user.getMbti();
+    }
+
+    public HobbyResDto(String categoryName){
+        this.category = categoryName;
     }
 }
