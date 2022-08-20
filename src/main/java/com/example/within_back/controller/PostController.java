@@ -74,4 +74,20 @@ public class PostController {
     public String getBoardName(@PathVariable Long boardId) {
         return postService.getBoardName(boardId);
     }
+
+    @PostMapping("/boards/{postId}/likes")
+    public int likes(@PathVariable Long postId, @RequestParam Long userId) {
+        return postService.likes(postId, userId);
+    }
+
+    @DeleteMapping("/boards/{postId}/unlikes")
+    public int unlikes(@PathVariable Long postId, @RequestParam Long userId) {
+        return postService.unlikes(postId, userId);
+    }
+
+    @GetMapping("/board/{postId}/isLiked")
+    public boolean isLiked(@PathVariable Long postId, @RequestParam Long userId) {
+        // 좋아요 누른 적 있으면 true 리턴
+        return postService.isLiked(postId, userId);
+    }
 }
