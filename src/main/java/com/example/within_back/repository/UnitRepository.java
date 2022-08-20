@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
-
+    Unit findByUnitName(String unitName);
 }
 
 
