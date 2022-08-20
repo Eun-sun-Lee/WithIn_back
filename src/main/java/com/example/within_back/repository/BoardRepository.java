@@ -9,5 +9,5 @@ import java.util.ArrayList;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    public Board findByCategory(String category);
+    public Board findByUnitIdAndCategory(Long unitId, String category);
 }

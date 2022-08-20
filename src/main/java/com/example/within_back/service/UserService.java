@@ -80,18 +80,22 @@ public class UserService {
 
     public ArrayList<BoardResDto> getMyBoard(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 user가 없습니다."));
+        Long unitId = user.getUnit().getId();
+
         String army = user.getArmy();
         String position = user.getPosition();
         String mbti = user.getMbti();
-        Board boardArmy = boardRepository.findByCategory(army);
-        Board boardPosition = boardRepository.findByCategory(position);
-        Board boardMbti = boardRepository.findByCategory(mbti);
+
+        Board boardArmy = boardRepository.findByUnitIdAndCategory(unitId, army);
+        Board boardPosition = boardRepository.findByUnitIdAndCategory(unitId, position);
+        Board boardMbti = boardRepository.findByUnitIdAndCategory(unitId, mbti);
+
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<BoardResDto> result = new ArrayList<>();
 
         for (Hobby hobby : data) {
             String hobbyCategory = hobby.getCategory();
-            Board boardHobby = boardRepository.findByCategory(hobbyCategory);
+            Board boardHobby = boardRepository.findByUnitIdAndCategory(unitId,hobbyCategory);
             BoardResDto temp = new BoardResDto(boardHobby);
             result.add(temp);
         }
