@@ -84,4 +84,10 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 post id 입니다."));
         return commentRepository.save(commentReqDto.toEntity(post, Author)).getId();
     }
+
+    public String getBoardName(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 board id 입니다."));
+        return board.getBoardName();
+    }
+
 }
