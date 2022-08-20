@@ -2,22 +2,17 @@ package com.example.within_back.service;
 
 import com.example.within_back.dto.PostReqDto;
 import com.example.within_back.dto.PostResDto;
-import com.example.within_back.entity.Board;
-import com.example.within_back.entity.Post;
-import com.example.within_back.entity.User;
-import com.example.within_back.repository.BoardRepository;
+import com.example.within_back.entity.*;
+import com.example.within_back.repository.*;
 import com.example.within_back.dto.CommentReqDto;
 import com.example.within_back.dto.CommentsResDto;
-import com.example.within_back.entity.Comment;
-import com.example.within_back.repository.CommentRepository;
-import com.example.within_back.repository.PostRepository;
-import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PostService {
@@ -30,6 +25,8 @@ public class PostService {
     BoardRepository boardRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    LikeRepository likeRepository;
 
     public int addLikes(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 post id입니다."));
@@ -90,4 +87,19 @@ public class PostService {
         return board.getBoardName();
     }
 
+    @Transactional
+    public int likes(Long postId, Long userId) {
+        likeRepository.likes(postId, userId);
+        return likeRepository.countByPostId(postId);
+    }
+    @Transactional
+    public int unlikes(Long postId, Long userId) {
+        likeRepository.unlikes(postId, userId);
+        return likeRepository.countByPostId(postId);
+    }
+
+    public boolean isLiked(Long postId, Long userId) {
+        Likes likes = likeRepository.findByPostIdAndUserId(postId, userId);
+        return !Objects.isNull(likes);
+    }
 }
