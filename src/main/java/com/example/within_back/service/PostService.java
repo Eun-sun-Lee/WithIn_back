@@ -38,14 +38,15 @@ public class PostService {
         return post.getLiked();
     }
 
-    public ArrayList<PostResDto> getPosts(String category){
-        Board board = boardRepository.findByCategory(category);
-        List<Post> data= board.getPosts();
+    public ArrayList<PostResDto> getPosts(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 board id 입니다."));
+        List<Post> data = board.getPosts();
         ArrayList<PostResDto> result = new ArrayList<>();
-        for(Post post : data) {
-            PostResDto temp = new PostResDto(post);
-            result.add(temp)
-;        }
+        for (Post post : data) {
+            int commentCount = commentRepository.countByPostId(post.getId());
+            PostResDto temp = new PostResDto(post, commentCount);
+            result.add(temp);
+        }
         return result;
     }
     //게시판 게시물 조회 (GET 방식)
@@ -58,11 +59,10 @@ public class PostService {
         return postRepository.save(postReqDto.toEntity(board,author)).getId();
     } //게시물 작성 (POST 방식)
 
-
-    public PostResDto findById(Long postId){
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
-        return new PostResDto(post);
+    public PostResDto getPost(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+        int commentCount = commentRepository.countByPostId(postId);
+        return new PostResDto(post, commentCount);
     } //게시글 조회
 
     public ArrayList<CommentsResDto> getComments(Long postId) {

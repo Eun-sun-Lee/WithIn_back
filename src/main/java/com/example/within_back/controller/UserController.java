@@ -62,7 +62,11 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public Long createUser(@RequestBody UserReqDto userReqDto){
+    public Long createUser(@RequestBody UserReqDto userReqDto) {
         return userService.createUser(userReqDto);
+    }
+    @GetMapping("/{userId}/unit")
+    public UnitResDto getUnit(@PathVariable Long userId) {
+        return userService.getUnit(userId);
     }
 }

@@ -9,5 +9,6 @@ import java.util.ArrayList;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
+    int countByPostId(Long postId);
     ArrayList<Comment> findByPostIdOrderByCreatedAt(Long postId);
 }

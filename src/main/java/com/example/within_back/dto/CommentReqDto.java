@@ -14,6 +14,3 @@ public class CommentReqDto {
         return new Comment(post, author, content);
     }
 }
-
-
-
