@@ -109,11 +109,21 @@ public class UserService {
     public ArrayList<HobbyResDto> getHobby(Long userId) {
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<HobbyResDto> result = new ArrayList<>();
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 USER ID입니다."));
+
+        result.add(new HobbyResDto("칭찬"));
+        result.add(new HobbyResDto("건의"));
+
         for (Hobby hobby : data) {
-            HobbyResDto temp = new HobbyResDto(hobby, user);
+            HobbyResDto temp = new HobbyResDto(hobby);
             result.add(temp);
         }
+
+        //user Info
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 USER ID입니다."));
+        result.add(new HobbyResDto(user.getArmy()));
+        result.add(new HobbyResDto(user.getPosition()));
+        result.add(new HobbyResDto(user.getMbti()));
+
         return result;
     }
 
