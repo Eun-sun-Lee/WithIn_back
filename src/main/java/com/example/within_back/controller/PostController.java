@@ -65,4 +65,9 @@ public class PostController {
         return postService.writeComment(postId, authorId, commentReqDto);
     }
 
+    @PostMapping("/create/unit/{unitName}")
+    public Long createUnit(@PathVariable String unitName){
+        return postService.createUnit(unitName);
+    }
+
 }

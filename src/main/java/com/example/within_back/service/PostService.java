@@ -2,16 +2,10 @@ package com.example.within_back.service;
 
 import com.example.within_back.dto.PostReqDto;
 import com.example.within_back.dto.PostResDto;
-import com.example.within_back.entity.Board;
-import com.example.within_back.entity.Post;
-import com.example.within_back.entity.User;
-import com.example.within_back.repository.BoardRepository;
+import com.example.within_back.entity.*;
+import com.example.within_back.repository.*;
 import com.example.within_back.dto.CommentReqDto;
 import com.example.within_back.dto.CommentsResDto;
-import com.example.within_back.entity.Comment;
-import com.example.within_back.repository.CommentRepository;
-import com.example.within_back.repository.PostRepository;
-import com.example.within_back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +16,9 @@ import java.util.List;
 @Service
 public class PostService {
 
+    private ArrayList<String> positionList = new ArrayList<>(List.of("보병", "기갑", "포병", "방공", "정보", "공병", "정보", "공병", "정보통신", "항공", "화학", "병기", "병참", "수송", "인사행정", "헌병", "재정", "정훈", "의무", "법무", "군종"));
+    private ArrayList<String> hobbyList = new ArrayList<>(List.of("축구", "농구", "야구", "헬스", "뜀걸음", "노래", "게임", "영화", "드라마", "만화", "요리", "독서"));
+
     @Autowired
     CommentRepository commentRepository;
     @Autowired
@@ -30,6 +27,8 @@ public class PostService {
     BoardRepository boardRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UnitRepository unitRepository;
 
     public int addLikes(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 post id입니다."));
@@ -83,5 +82,41 @@ public class PostService {
         User Author = userRepository.findById(authorId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 user id 입니다."));
         Post post = postRepository.findById(postId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 post id 입니다."));
         return commentRepository.save(commentReqDto.toEntity(post, Author)).getId();
+    }
+
+    @Transactional
+    public Long createUnit(String unitName){
+        Unit unit = unitRepository.save(new Unit(unitName));
+
+        boardRepository.save(new Board("칭찬", "칭찬", "부대 미담을 공유해주세요", unit));
+        boardRepository.save(new Board("건의", "건의", "건의 내용을 공유해주세요", unit));
+        boardRepository.save(new Board(unitName, unitName, unitName + " 소속 장병들을 위한 게시판입니다", unit));
+
+        boardRepository.save(new Board("ISFJ", "ISFJ", "ISFJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ISFP", "ISFP", "ISFP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ISTJ", "ISTJ", "ISTJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ISTP", "ISTP", "ISTP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("INFJ", "INFJ", "INFJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("INFP", "INFP", "INFP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("INTJ", "INTJ", "INTJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("INTP", "INTP", "INTP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ESFJ", "ESFJ", "ESFJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ESFP", "ESFP", "ESFP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ESTJ", "ESTJ", "ESTJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ESTP", "ESTP", "ESTP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ENFJ", "ENFJ", "ENFJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ENFP", "ENFP", "ENFP들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ENTJ", "ENTJ", "ENTJ들을 위한 게시판입니다", unit));
+        boardRepository.save(new Board("ENTP", "ENTP", "ENTP들을 위한 게시판입니다", unit));
+
+        for(String position : positionList){
+            boardRepository.save(new Board(position, position, position + "들을 위한 게시판입니다", unit));
+        }
+
+        for(String hobby : hobbyList){
+            boardRepository.save(new Board(hobby, hobby, hobby + "을(를) 좋아하는 사람들을 위한 게시판입니다", unit));
+        }
+
+        return unit.getId();
     }
 }
