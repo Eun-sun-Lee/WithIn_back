@@ -4,13 +4,10 @@ import com.example.within_back.dto.*;
 import com.example.within_back.entity.Message;
 import com.example.within_back.entity.Post;
 import com.example.within_back.entity.User;
-import com.example.within_back.repository.MessageRepository;
+import com.example.within_back.repository.*;
 import com.example.within_back.entity.Board;
 import com.example.within_back.entity.Hobby;
-import com.example.within_back.repository.BoardRepository;
-import com.example.within_back.repository.HobbyRepository;
-import com.example.within_back.repository.PostRepository;
-import com.example.within_back.repository.UserRepository;
+import com.example.within_back.entity.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,13 +32,20 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    LikeRepository likeRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
     public ArrayList<PostResDto> getMyPosts(Long userId){
         ArrayList<Post> data = postRepository.findByAuthorId(userId);
 
         ArrayList<PostResDto> result = new ArrayList<>();
 
         for(Post post : data){
-            result.add(new PostResDto(post));
+            int commentCount = commentRepository.countByPostId(post.getId());
+            int likeCount = likeRepository.countByPostId(post.getId());
+            result.add(new PostResDto(post, likeCount, commentCount));
         }
 
         return result;
@@ -80,23 +84,26 @@ public class UserService {
 
     public ArrayList<BoardResDto> getMyBoard(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 user가 없습니다."));
+        Long unitId = user.getUnit().getId();
+
         String army = user.getArmy();
         String position = user.getPosition();
         String mbti = user.getMbti();
-        Board boardArmy = boardRepository.findByCategory(army);
-        Board boardPosition = boardRepository.findByCategory(position);
-        Board boardMbti = boardRepository.findByCategory(mbti);
+
+        Board boardArmy = boardRepository.findByUnitIdAndCategory(unitId, army);
+        Board boardPosition = boardRepository.findByUnitIdAndCategory(unitId, position);
+        Board boardMbti = boardRepository.findByUnitIdAndCategory(unitId, mbti);
 
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<BoardResDto> result = new ArrayList<>();
 
-
         for (Hobby hobby : data) {
             String hobbyCategory = hobby.getCategory();
-            Board boardHobby = boardRepository.findByCategory(hobbyCategory);
+            Board boardHobby = boardRepository.findByUnitIdAndCategory(unitId,hobbyCategory);
             BoardResDto temp = new BoardResDto(boardHobby);
             result.add(temp);
         }
+
         BoardResDto temp1 = new BoardResDto(boardArmy);
         result.add(temp1);
         BoardResDto temp2 = new BoardResDto(boardPosition);
@@ -109,9 +116,6 @@ public class UserService {
     public ArrayList<HobbyResDto> getHobby(Long userId) {
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<HobbyResDto> result = new ArrayList<>();
-
-        result.add(new HobbyResDto("칭찬", "default"));
-        result.add(new HobbyResDto("건의", "default"));
 
         for (Hobby hobby : data) {
             HobbyResDto temp = new HobbyResDto(hobby);
@@ -160,8 +164,14 @@ public class UserService {
         return userRepository.findByUid(uid).getId();
     }
 
-    public Long createUser(UserReqDto userReqDto){
+    public Long createUser(UserReqDto userReqDto) {
         User user = userReqDto.toEntity();
         return userRepository.save(user).getId();
+    }
+
+    public UnitResDto getUnit(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 user id 입니다."));
+        Unit unit = user.getUnit();
+        return new UnitResDto(unit);
     }
 }
