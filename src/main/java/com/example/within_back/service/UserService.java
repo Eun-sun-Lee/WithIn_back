@@ -113,9 +113,6 @@ public class UserService {
         ArrayList<Hobby> data = hobbyRepository.findByUserId(userId);
         ArrayList<HobbyResDto> result = new ArrayList<>();
 
-        result.add(new HobbyResDto("칭찬", "default"));
-        result.add(new HobbyResDto("건의", "default"));
-
         for (Hobby hobby : data) {
             HobbyResDto temp = new HobbyResDto(hobby);
             result.add(temp);
