@@ -65,4 +65,8 @@ public class PostController {
         return postService.writeComment(postId, authorId, commentReqDto);
     }
 
+    @GetMapping("/boards/{boardId}/name")
+    public String getBoardName(@PathVariable Long boardId) {
+        return postService.getBoardName(boardId);
+    }
 }
