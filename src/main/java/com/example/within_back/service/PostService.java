@@ -56,10 +56,9 @@ public class PostService {
 
 
     @Transactional
-    public Long save(PostReqDto postReqDto, String category,Long userId){
+    public Long postPost(Long boardId, Long userId, PostReqDto postReqDto){
         User author = userRepository.findById(userId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 user id 입니다."));
-        Long unitId = author.getUnit().getId();
-        Board board = boardRepository.findByUnitIdAndCategory(unitId, category);
+        Board board = boardRepository.findById(boardId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 board id 입니다."));
         return postRepository.save(postReqDto.toEntity(board,author)).getId();
     } //게시물 작성 (POST 방식)
 
