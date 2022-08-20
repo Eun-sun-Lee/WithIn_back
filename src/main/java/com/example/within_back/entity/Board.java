@@ -1,8 +1,5 @@
 package com.example.within_back.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +17,9 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String boardName;
-
     private String category;
+    private String explanation = "";
 
     @OneToMany(mappedBy = "board")
     private List<Post> posts = new ArrayList();
@@ -33,8 +29,10 @@ public class Board {
     private Unit unit;
 
     @Builder
-    public Board(String boardName, String category){
+    public Board(String boardName, String category, String explanation, Unit unit){
         this.boardName = boardName;
         this.category = category;
+        this.explanation = explanation;
+        this.unit = unit;
     }
 }
