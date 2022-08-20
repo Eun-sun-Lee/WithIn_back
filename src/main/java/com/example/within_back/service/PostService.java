@@ -119,4 +119,9 @@ public class PostService {
 
         return unit.getId();
     }
+    public String getBoardName(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 board id 입니다."));
+        return board.getBoardName();
+    }
+
 }

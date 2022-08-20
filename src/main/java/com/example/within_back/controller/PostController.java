@@ -70,4 +70,8 @@ public class PostController {
         return postService.createUnit(unitName);
     }
 
+    @GetMapping("/boards/{boardId}/name")
+    public String getBoardName(@PathVariable Long boardId) {
+        return postService.getBoardName(boardId);
+    }
 }
