@@ -34,6 +34,10 @@ public class UserService {
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    UnitRepository unitRepository;
+
     public ArrayList<PostResDto> getMyPosts(Long userId){
         ArrayList<Post> data = postRepository.findByAuthorId(userId);
 
@@ -161,7 +165,8 @@ public class UserService {
     }
 
     public Long createUser(UserReqDto userReqDto) {
-        User user = userReqDto.toEntity();
+        Unit unit = unitRepository.findByUnitName(userReqDto.getArmy());
+        User user = userReqDto.toEntity(unit);
         return userRepository.save(user).getId();
     }
 

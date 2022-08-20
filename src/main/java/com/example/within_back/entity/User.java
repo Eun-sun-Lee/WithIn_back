@@ -43,12 +43,13 @@ public class User {
     private Unit unit;
 
     @Builder
-    public User(String uid, String email, String nickname, String army, String position, String mbti) {
+    public User(String uid, String email, String nickname, String army, String position, String mbti, Unit unit) {
         this.uid = uid;
         this.email = email;
         this.nickname = nickname;
         this.army = army;
         this.position = position;
         this.mbti = mbti;
+        this.unit = unit;
     }
 }

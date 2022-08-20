@@ -1,5 +1,6 @@
 package com.example.within_back.dto;
 
+import com.example.within_back.entity.Unit;
 import com.example.within_back.entity.User;
 import lombok.Getter;
 
@@ -12,7 +13,7 @@ public class UserReqDto {
     private String position;
     private String mbti;
 
-    public User toEntity(){
-        return User.builder().uid(uid).email(email).nickname(nickname).army(army).position(position).mbti(mbti).build();
+    public User toEntity(Unit unit){
+        return User.builder().uid(uid).email(email).nickname(nickname).army(army).position(position).mbti(mbti).unit(unit).build();
     }
 }
