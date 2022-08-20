@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PostService {
@@ -27,6 +28,8 @@ public class PostService {
     BoardRepository boardRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    LikeRepository likeRepository;
     @Autowired
     UnitRepository unitRepository;
 
@@ -124,4 +127,19 @@ public class PostService {
         return board.getBoardName();
     }
 
+    @Transactional
+    public int likes(Long postId, Long userId) {
+        likeRepository.likes(postId, userId);
+        return likeRepository.countByPostId(postId);
+    }
+    @Transactional
+    public int unlikes(Long postId, Long userId) {
+        likeRepository.unlikes(postId, userId);
+        return likeRepository.countByPostId(postId);
+    }
+
+    public boolean isLiked(Long postId, Long userId) {
+        Likes likes = likeRepository.findByPostIdAndUserId(postId, userId);
+        return !Objects.isNull(likes);
+    }
 }
