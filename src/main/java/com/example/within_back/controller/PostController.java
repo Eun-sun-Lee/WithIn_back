@@ -86,7 +86,7 @@ public class PostController {
         return postService.unlikes(postId, userId);
     }
 
-    @GetMapping("/board/{postId}/isLiked")
+    @GetMapping("/boards/{postId}/isLiked")
     public boolean isLiked(@PathVariable Long postId, @RequestParam Long userId) {
         // 좋아요 누른 적 있으면 true 리턴
         return postService.isLiked(postId, userId);
