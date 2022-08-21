@@ -76,7 +76,7 @@ public class PostController {
         return postService.getBoardName(boardId);
     }
 
-    @PostMapping("/boards/{postId}/likes")
+    @GetMapping("/boards/{postId}/likes")
     public int likes(@PathVariable Long postId, @RequestParam Long userId) {
         return postService.likes(postId, userId);
     }
