@@ -44,8 +44,8 @@ public class PostController {
 
 
     @RequestMapping(value="/boards/{boardId}/post", method=RequestMethod.POST)
-    public Long postPost(@PathVariable Long boardId, @RequestParam("userId") Long userId, @RequestBody PostReqDto postResDto){
-        return postService.postPost(boardId, userId, postResDto);
+    public Long postPost(@PathVariable Long boardId, @RequestParam("userId") Long userId, @RequestBody PostReqDto postReqDto){
+        return postService.postPost(boardId, userId, postReqDto);
     }
     //게시물 작성 (POST 방식)
 
