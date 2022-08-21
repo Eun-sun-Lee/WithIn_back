@@ -81,7 +81,7 @@ public class PostController {
         return postService.likes(postId, userId);
     }
 
-    @DeleteMapping("/boards/{postId}/unlikes")
+    @GetMapping("/boards/{postId}/unlikes")
     public int unlikes(@PathVariable Long postId, @RequestParam Long userId) {
         return postService.unlikes(postId, userId);
     }
