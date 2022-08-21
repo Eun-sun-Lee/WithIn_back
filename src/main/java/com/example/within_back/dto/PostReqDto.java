@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 public class PostReqDto {
     private String title;
     private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
 
         public Post toEntity(Board board,User author){
             return new Post(board, author,title,content);
